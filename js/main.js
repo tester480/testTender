@@ -3,7 +3,9 @@ $(document).ready(function(){
    header();
    sliderHome();
    sliderFeedback();
-   // upbtn();
+   popup();
+   anchor();
+   upbtn();
 });
 
 function mobmenu() {
@@ -27,10 +29,10 @@ function mobmenu() {
 function header() {
    $(window).scroll(function() {
       if ($(window).scrollTop() > 85) {
-         $('.header').addClass('shadow');
+         $('.header').addClass('opacity');
       }
       else {
-         $('.header').removeClass('shadow');
+         $('.header').removeClass('opacity');
       }
    });
 }
@@ -83,27 +85,29 @@ function sliderFeedback() {
 }
 
 function anchor() {
-   $(".nav, .home, .about, .question").on("click","a", function (event) {
+   $(".nav").on("click","a", function (event) {
       event.preventDefault();
       var id = $(this).attr('href'),
           top = $(id).offset().top;
-      $('html, body').animate({scrollTop: top - 85}, 700);
+      $('html, body').animate({scrollTop: top - 83}, 600);
    });
 }
 
-function navlink() {
-   $(window).scroll(function () {
-      var $sections = $('section');
-      $sections.each(function(i,el){
-         var top  = $(el).offset().top-100;
-         var bottom = top +$(el).height();
-         var scroll = $(window).scrollTop();
-         var id = $(el).attr('id');
-         if( scroll > top && scroll < bottom){
-               $('nav a.nav__link_active').removeClass('nav__link_active');
-            $('nav a[href="#'+id+'"]').addClass('nav__link_active');
+function popup() {
+   $(".btn-popup").on('click', function () {
+      var $parent = $(".main");
+      if ($parent.hasClass('popup-show')) {
+         $parent.removeClass('popup-show');
+      } else {
+         $parent.addClass('popup-show');
+      }
+   }); 
+   $(".wrapper").on('click', function(event) {
+      if (!$(event.target).closest(".btn-popup, .popup__content").length) {
+         if ($(".main").hasClass("popup-show")) {
+            $(".main").removeClass("popup-show");
          }
-      })
+      }
    });
 }
 
@@ -120,6 +124,6 @@ function upbtn() {
       event.preventDefault();
       var id = $(this).attr('href'),
           top = $(id).offset().top;
-      $('html, body, .wrapper').animate({scrollTop: top - 85}, 1000);
+      $('html, body, .wrapper').animate({scrollTop: top - 83}, 600);
    });
 }
