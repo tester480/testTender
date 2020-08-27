@@ -108,7 +108,7 @@ function anchor() {
 
 function popupFeedback() {
    $(".btn-popup").on('click', function () {
-      var $parent = $(".main");
+      var $parent = $("body");
       if ($parent.hasClass('popup-show')) {
          $parent.removeClass('popup-show');
       } else {
@@ -117,8 +117,8 @@ function popupFeedback() {
    }); 
    $(".wrapper").on('click', function(event) {
       if (!$(event.target).closest(".btn-popup, .popup__content").length) {
-         if ($(".main").hasClass("popup-show")) {
-            $(".main").removeClass("popup-show");
+         if ($("body").hasClass("popup-show")) {
+            $("body").removeClass("popup-show");
          }
       }
    });
