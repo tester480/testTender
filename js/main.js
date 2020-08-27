@@ -52,7 +52,7 @@ function sliderHome() {
 
 function sliderFeedback() {
    $('.feedback__slider').slick({
-      infinite: true,
+      infinite: false,
       slidesToShow: 4,
       slidesToScroll: 4,
       dots: true,
