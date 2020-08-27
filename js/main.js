@@ -3,7 +3,8 @@ $(document).ready(function(){
    header();
    sliderHome();
    sliderFeedback();
-   popup();
+   popupFeedback();
+   popupPortfolio();
    anchor();
    upbtn();
 });
@@ -93,7 +94,7 @@ function anchor() {
    });
 }
 
-function popup() {
+function popupFeedback() {
    $(".btn-popup").on('click', function () {
       var $parent = $(".main");
       if ($parent.hasClass('popup-show')) {
@@ -109,6 +110,22 @@ function popup() {
          }
       }
    });
+}
+
+function popupPortfolio() {
+   $('.portfolio__img').magnificPopup({
+		type: 'image',
+		closeOnContentClick: true,
+		closeBtnInside: false,
+		fixedContentPos: true,
+		image: {
+			verticalFit: true
+		},
+		zoom: {
+			enabled: true,
+			duration: 300
+		}
+	});
 }
 
 function upbtn() { 
