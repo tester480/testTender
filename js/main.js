@@ -3,9 +3,10 @@ $(document).ready(function(){
    header();
    sliderHome();
    sliderFeedback();
+   anchor();
+   activeNavlink();
    popupFeedback();
    popupPortfolio();
-   anchor();
    upbtn();
 });
 
@@ -55,6 +56,7 @@ function sliderFeedback() {
       infinite: false,
       slidesToShow: 4,
       slidesToScroll: 4,
+      autoplay: 500,
       dots: true,
       dotsClass: 'dots',
       prevArrow: '<div class="prev arrow"></div>',
@@ -106,6 +108,22 @@ function anchor() {
    });
 }
 
+function activeNavlink() {
+   $(window).scroll(function () {
+      var $sections = $('section');
+      $sections.each(function(i,el){
+         var top  = $(el).offset().top-100;
+         var bottom = top +$(el).height();
+         var scroll = $(window).scrollTop();
+         var id = $(el).attr('id');
+         if( scroll > top && scroll < bottom){
+               $('nav a.nav__link_active').removeClass('nav__link_active');
+            $('nav a[href="#'+id+'"]').addClass('nav__link_active');
+         }
+      })
+   });
+}
+
 function popupFeedback() {
    $(".btn-popup").on('click', function () {
       var $parent = $("body");
@@ -125,17 +143,26 @@ function popupFeedback() {
 }
 
 function popupPortfolio() {
-   $('.portfolio__img').magnificPopup({
+   $('.portfolio__body').magnificPopup({
+		delegate: 'a',
 		type: 'image',
-		closeOnContentClick: true,
+		closeOnContentClick: false,
 		closeBtnInside: false,
-		fixedContentPos: true,
 		image: {
-			verticalFit: true
+			verticalFit: true,
+			titleSrc: function(item) {
+				return item.el.attr('title') + ' &middot; <a class="image-source-link" href="'+item.el.attr('data-source')+'" target="_blank">image source</a>';
+			}
+		},
+		gallery: {
+			enabled: true
 		},
 		zoom: {
 			enabled: true,
-			duration: 300
+			duration: 300,
+			opener: function(element) {
+				return element.find('img');
+			}
 		}
 	});
 }
