@@ -93,13 +93,10 @@ function anchor() {
       var id = $(this).attr('href'),
           top = $(id).offset().top;
 
-      if($(window).width() > 1440) {
+      if($(window).width() > 1240) {
          $('html, body').animate({scrollTop: top - 83}, 600);
       } 
-      else if($(window).width() <= 1440 && $(window).width() >= 992) {
-         $('html, body').animate({scrollTop: top - 78}, 600);
-      } 
-      else if($(window).width() < 992 && $(window).width() >= 525) {
+      else if($(window).width() <= 1240 && $(window).width() >= 525) {
          $('html, body').animate({scrollTop: top - 73}, 600);
       }
       else {
@@ -180,6 +177,15 @@ function upbtn() {
       event.preventDefault();
       var id = $(this).attr('href'),
           top = $(id).offset().top;
-      $('html, body, .wrapper').animate({scrollTop: top - 83}, 600);
+
+      if($(window).width() > 1240) {
+         $('html, body, .wrapper').animate({scrollTop: top - 83}, 600);
+      } 
+      else if($(window).width() <= 1240 && $(window).width() >= 525) {
+         $('html, body, .wrapper').animate({scrollTop: top - 73}, 600);
+      }
+      else {
+         $('html, body, .wrapper').animate({scrollTop: top - 67}, 600);
+      }
    });
 }
